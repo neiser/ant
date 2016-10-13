@@ -62,6 +62,8 @@ protected:
 
     using result_t = utils::FitterSergey::result_t;
 
+
+    const bool runAnt;
     const params_t params;
 
     utils::FitterSergey fitter_sergey;
