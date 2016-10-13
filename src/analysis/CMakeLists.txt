@@ -61,6 +61,7 @@ set(ANALYSIS_PHYSICS
   physics/pi0/RarePion.cc
   physics/common/InterpolatedPulls.cc
   physics/common/ReconstructCheck.cc
+  physics/etaprime/etaprime_sergey.cc
   physics/common/ExtractShowerDepth.cc
   physics/common/MCChannels.cc
   physics/common/IMCombFitPlots.cc
@@ -109,6 +110,7 @@ set(ANALYSIS_UTILS
   utils/MCSmear.cc
   utils/MCFakeReconstructed.cc
   utils/PullsWriter.cc
+  utils/FitterSergey.cc
   )
 
 set(ANALYSIS_ALL
