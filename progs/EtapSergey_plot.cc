@@ -95,7 +95,7 @@ struct Hist_t {
 //        auto ept = ExpConfig::Setup::GetDetector<expconfig::detector::EPT>();
         h_KinFitProb = HistFac.makeTH1D("KinFitProb","p","",BinSettings(200,0,1),"h_KinFitProb");
 
-        BinSettings bins_IM(100,600,1000);
+        BinSettings bins_IM(150,750,1100);
 
         h_IM_3g_4g_high = HistFac.makeTH2D("IM 3g vs. 4g high","IM 4g","IM 3g high",bins_IM,bins_IM,"h_IM_3g_4g_high");
         h_IM_4g = HistFac.makeTH1D("IM 4g","IM 4g","",bins_IM,"h_IM_4g");
