@@ -207,7 +207,7 @@ struct SigHist_t : CommonHist_t {
 
     TH1D* h_Bachelor_E;
 
-    const BinSettings bins_IM_Etap {100, 800,1050};
+    const BinSettings bins_IM_Etap {150, 750,1100};
     const BinSettings bins_IM_Omega{100, 550, 950};
     const BinSettings bins_ZVertex{100, -15, 15};
 
