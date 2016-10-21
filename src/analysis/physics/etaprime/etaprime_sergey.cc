@@ -137,6 +137,9 @@ void EtapSergey::fillTree(EtapSergey::Tree_t& t,
         t.TaggE  = r.TaggE;
         t.TaggT  = r.TaggT;
         t.TaggCh = r.TaggCh;
+        t.TaggW  = t.TaggT > -5.5 && t.TaggT < 5.5 ? 1.0 : -(5.5+5.5)/(50+50-(5.5+5.5));
+        if(t.TaggT<-50 || t.TaggT>50)
+            t.TaggW = 0;
 
         t.KinFitProb     = r.KinFitProb;
         t.TreeFitProb    = r.TreeFitProb;
@@ -352,7 +355,7 @@ void EtapSergey::ShowResult()
 {
     canvas c("Result");
     c << drawoption("colz")
-      << TTree_drawable(treeSergey.Tree, "IM_4g >> (100,700,1050)","TreeFitProb>0.01");
+      << TTree_drawable(treeSergey.Tree, "IM_4g >> (150,750,1100)","(TreeFitProb>0.01)*TaggW");
 
     if(!runAnt) {
         c << endc;

@@ -18,6 +18,7 @@ public:
         ADD_BRANCH_T(double, TaggE)
         ADD_BRANCH_T(double, TaggT)
         ADD_BRANCH_T(double, TaggCh)
+        ADD_BRANCH_T(double, TaggW)
 
         ADD_BRANCH_T(double, KinFitProb)
         ADD_BRANCH_T(double, TreeFitProb)
