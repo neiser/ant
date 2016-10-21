@@ -934,16 +934,22 @@ void EtapOmegaG::ShowResult()
                        << Sig.h_Cuts << Ref.h_Cuts
                        << h_LostPhotons_sig << h_LostPhotons_ref
                        << endc;
-    Sig.Pi0.t.Tree->AddFriend(Sig.t.Tree);
-    Sig.OmegaPi0.t.Tree->AddFriend(Sig.t.Tree);
+
 
     canvas("Reference")
             << TTree_drawable(Ref.t.Tree, "IM_2g >> (200,650,1050)")
             << endc;
 
+    Sig.Pi0.t.Tree->AddFriend(Sig.t.Tree);
+    Sig.OmegaPi0.t.Tree->AddFriend(Sig.t.Tree);
+    Sig.Pi0.t.Tree->AddFriend(Sig.treeCommon);
+    Sig.OmegaPi0.t.Tree->AddFriend(Sig.treeCommon);
+
     canvas("Signal")
-            << TTree_drawable(Sig.OmegaPi0.t.Tree, "Bachelor_E >> (100,50,250)","TreeFitProb>0.01")
-            << TTree_drawable(Sig.Pi0.t.Tree, "Bachelor_E[0] >> (100,50,250)","TreeFitProb>0.01")
+            << TTree_drawable(Sig.OmegaPi0.t.Tree, "Bachelor_E >> (100,50,250)","(TreeFitProb>0.01)*TaggW")
+            << TTree_drawable(Sig.Pi0.t.Tree, "Bachelor_E[0] >> (100,50,250)","(TreeFitProb>0.01)*TaggW")
+            << TTree_drawable(Sig.OmegaPi0.t.Tree, "IM_Pi0gg >> (150,750,1100)","(TreeFitProb>0.01)*TaggW")
+            << TTree_drawable(Sig.Pi0.t.Tree, "IM_Pi0gg >> (150,750,1100)","(TreeFitProb>0.01)*TaggW")
             << TTree_drawable(Sig.OmegaPi0.t.Tree, "MCTrueMatch")
             << TTree_drawable(Sig.Pi0.t.Tree, "MCTrueMatch")
             << endc;
