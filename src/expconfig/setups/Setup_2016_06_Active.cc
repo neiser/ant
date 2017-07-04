@@ -51,6 +51,7 @@ Setup_2016_06_Active::Setup_2016_06_Active(const string& name, OptionsPtr opt) :
     AddDetector(PID);
     AddDetector(TAPS);
     AddDetector(TAPSVeto);
+    AddDetector(APT);
 
     // Possible: can set set inner ring and outer ring to NoCalib for TAPS (see 2014) "touches hole"
     // removed

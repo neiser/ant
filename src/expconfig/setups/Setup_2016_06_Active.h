@@ -7,6 +7,7 @@
 #include "detectors/TAPSVeto.h"
 #include "detectors/Tagger.h"
 #include "detectors/Cherenkov.h"
+#include "detectors/APT.h"
 
 namespace ant {
 namespace expconfig {
@@ -26,6 +27,7 @@ protected:
     const std::shared_ptr<detector::PID_2014> PID;
     const std::shared_ptr<detector::TAPS_2013> TAPS;
     const std::shared_ptr<detector::TAPSVeto_2014> TAPSVeto;
+    const std::shared_ptr<detector::APT> APT;
 
 public:
 
