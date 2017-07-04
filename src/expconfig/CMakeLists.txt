@@ -21,6 +21,7 @@ set(SRCS_SETUPS
   setups/Setup_2017_03.cc
   setups/Setup_2010_03_Base.cc
   setups/Setup_2010_09_Compton.cc
+  setups/Setup_2016_06_Active.cc
   )
 
 set(SRCS_DETECTORS
@@ -32,6 +33,8 @@ set(SRCS_DETECTORS
   detectors/PID.cc
   detectors/TAPSVeto.cc
   detectors/Cherenkov.h
+  detectors/APT.cc
+  detectors/detail/apt_elements.h
   detectors/detail/EPT_2014_elements.h
   detectors/detail/Tagger_2007_1508_elements.h
   detectors/detail/Tagger_2010_03_450_elements.h

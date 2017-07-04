@@ -25,7 +25,7 @@ struct Detector_t {
         Tagger, TaggerMicro, EPT, Moeller, PairSpec,
         CB, PID, MWPC0, MWPC1,
         TAPS, TAPSVeto, Cherenkov,
-        Raw
+        Raw, APT
     };
 
     // Any_t represents a collection of detectors

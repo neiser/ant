@@ -63,6 +63,7 @@ const map<Detector_t::Type_t, string> detectorTypeMap = {
     MAKE_DETECTOR_TYPE_ENTRY(TAPSVeto),
     MAKE_DETECTOR_TYPE_ENTRY(Trigger),
     MAKE_DETECTOR_TYPE_ENTRY(Raw),
+    MAKE_DETECTOR_TYPE_ENTRY(APT)
 };
 
 const char* ant::Detector_t::ToString(const Type_t& type)
