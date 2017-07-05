@@ -42,7 +42,8 @@ Setup_2016_06_Active::Setup_2016_06_Active(const string& name, OptionsPtr opt) :
     CB(make_shared<detector::CB>()),
     PID(make_shared<detector::PID_2014>()),
     TAPS(make_shared<detector::TAPS_2013>(Cherenkov != nullptr, false)), // false = don't use sensitive channels
-    TAPSVeto(make_shared<detector::TAPSVeto_2014>(Cherenkov != nullptr))
+    TAPSVeto(make_shared<detector::TAPSVeto_2014>(Cherenkov != nullptr)),
+    APT(make_shared<detector::APT_2017>())
 {
     // add the detectors of interest
     AddDetector(Trigger);
@@ -136,6 +137,13 @@ Setup_2016_06_Active::Setup_2016_06_Active(const string& name, OptionsPtr opt) :
                                                timecuts ? interval<double>{-12, 12} : no_timecut,
                                                timecuts ? interval<double>{-12, 12} : no_timecut
                                                );
+    AddCalibration<calibration::Time>(APT,
+                                          calibrationDataManager,
+                                          convert_CATCH_CB,
+                                          -325,
+                                          std::make_shared<calibration::gui::FitGaus>(),
+                                          timecuts ? interval<double>{-25, 40} : no_timecut
+                                          );
 
     AddCalibration<calibration::CB_Energy>(CB, calibrationDataManager, convert_GeSiCa_SADC,
                                            std::vector<double>{0},    // default pedestal
