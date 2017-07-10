@@ -34,7 +34,7 @@ set(SRCS_DETECTORS
   detectors/TAPSVeto.cc
   detectors/Cherenkov.h
   detectors/APT.cc
-  detectors/detail/apt_elements.h
+  detectors/detail/APT_elements.h
   detectors/detail/EPT_2014_elements.h
   detectors/detail/Tagger_2007_1508_elements.h
   detectors/detail/Tagger_2010_03_450_elements.h
