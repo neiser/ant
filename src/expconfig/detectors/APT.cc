@@ -34,6 +34,6 @@ void APT::InitElements()
     for(size_t i=0; i<elements.size();i++) {
         Element_t& element = elements[i];
         if(element.Channel != i)
-            throw Exception("PID element channels not in correct order");
+            throw Exception("APT element channels not in correct order");
     }
 }
