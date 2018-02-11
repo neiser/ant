@@ -56,6 +56,7 @@ set(SRCS
     fitfunctions/FitWeibullLandauPol1.cc
     fitfunctions/FitVetoBand.cc
     modules/detail/TH2Storage.cc
+    modules/EPT_Time.cc
   )
 
 
