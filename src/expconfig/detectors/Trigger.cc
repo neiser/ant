@@ -28,16 +28,27 @@ const Trigger::ReferenceTimingHitMapping_t Trigger::Reference_CATCH_TaggerCrate 
 const Trigger::ReferenceTimingHitMapping_t Trigger::Reference_CATCH_CBCrate = {1001, 2000};
 const Trigger::ReferenceTimingHitMapping_t Trigger_2014::Reference_V1190_TAPSPbWO4 = {1002, 29192};
 
+// more reference channels for the tagger crate, maybe give it a better name than just 1, 2, 3 suffix
+/// \todo think about creating a new Trigger detector to reflect the fact
+/// that those new reference channels are only present since 2018 or 2017 or whatever :)
+const Trigger::ReferenceTimingHitMapping_t Trigger::Reference_CATCH_TaggerCrate1 = {1010, 1400}; // change 1400 to 927
+const Trigger::ReferenceTimingHitMapping_t Trigger::Reference_CATCH_TaggerCrate2 = {1011, 1400}; // change 1400 to 1055
+const Trigger::ReferenceTimingHitMapping_t Trigger::Reference_CATCH_TaggerCrate3 = {1012, 1400}; // change 1400 to 1151
+
+
 void Trigger::BuildMappings(std::vector<UnpackerAcquConfig::hit_mapping_t>& hit_mappings,
                             std::vector<UnpackerAcquConfig::scaler_mapping_t>&) const {
-    hit_mappings.emplace_back(
-                Reference_CATCH_TaggerCrate.LogicalChannel,
-                Reference_CATCH_TaggerCrate.AcquRawChannel
-                );
-    hit_mappings.emplace_back(
-                Reference_CATCH_CBCrate.LogicalChannel,
-                Reference_CATCH_CBCrate.AcquRawChannel
-                );
+    const auto& references = {
+        Reference_CATCH_CBCrate,
+        Reference_CATCH_TaggerCrate,
+        Reference_CATCH_TaggerCrate1,
+        Reference_CATCH_TaggerCrate2,
+        Reference_CATCH_TaggerCrate3
+    };
+
+    for(const auto& reference : references) {
+        hit_mappings.emplace_back(reference.LogicalChannel, reference.AcquRawChannel);
+    }
 }
 
 void Trigger_2014::BuildMappings(std::vector<UnpackerAcquConfig::hit_mapping_t>& hit_mappings,

@@ -47,6 +47,9 @@ struct Trigger :
     };
 
     static const ReferenceTimingHitMapping_t Reference_CATCH_TaggerCrate;
+    static const ReferenceTimingHitMapping_t Reference_CATCH_TaggerCrate1;
+    static const ReferenceTimingHitMapping_t Reference_CATCH_TaggerCrate2;
+    static const ReferenceTimingHitMapping_t Reference_CATCH_TaggerCrate3;
     static const ReferenceTimingHitMapping_t Reference_CATCH_CBCrate;
 
     // for UnpackerAcquConfig
