@@ -31,6 +31,17 @@ struct EPT :
 
     const static std::string ScalerName;
 
+    enum class Sector_t {
+        SectorA, SectorB, SectorC
+    };
+    virtual Sector_t GetSector(unsigned channel) const {
+        if(channel < 16)
+            return Sector_t::SectorA;
+        else if(channel < 32)
+            return Sector_t::SectorB;
+        return Sector_t::SectorC;
+    }
+
 protected:
 
     /// \todo have a look at ugcal?
