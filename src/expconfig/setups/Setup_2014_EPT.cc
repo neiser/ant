@@ -4,6 +4,7 @@
 #include "base/Logger.h"
 
 #include "calibration/modules/Time.h"
+#include "calibration/modules/EPT_Time.h"
 #include "calibration/modules/CB_Energy.h"
 #include "calibration/modules/CB_TimeWalk.h"
 #include "calibration/modules/PID_Energy.h"
@@ -77,9 +78,25 @@ Setup_2014_EPT::Setup_2014_EPT(const string& name, OptionsPtr opt) :
     const auto& convert_CATCH_Tagger = make_shared<calibration::converter::CATCH_TDC>(
                                            Trigger->Reference_CATCH_TaggerCrate
                                            );
+
+    // I don't know if the new tagger actually uses CATCH TDCs (which require a quite special overflow handling),
+    // so maybe another special purpose converter is required, or one of the
+    // simpler ones just doing some byte conversions
+    const auto& convert_CATCH_Tagger1 = make_shared<calibration::converter::CATCH_TDC>(
+                                           Trigger->Reference_CATCH_TaggerCrate1 // note the usage of the different reference channel
+                                           );
+    const auto& convert_CATCH_Tagger2 = make_shared<calibration::converter::CATCH_TDC>(
+                                           Trigger->Reference_CATCH_TaggerCrate2 // note the usage of the different reference channel
+                                           );
+    const auto& convert_CATCH_Tagger3 = make_shared<calibration::converter::CATCH_TDC>(
+                                           Trigger->Reference_CATCH_TaggerCrate3 // note the usage of the different reference channel
+                                           );
+
+
     const auto& convert_CATCH_CB = make_shared<calibration::converter::CATCH_TDC>(
                                        Trigger->Reference_CATCH_CBCrate
                                        );
+
     const auto& convert_GeSiCa_SADC = make_shared<calibration::converter::GeSiCa_SADC>();
     const auto& convert_V1190_TAPSPbWO4 =  make_shared<calibration::converter::MultiHitReference<std::uint16_t>>(
                                                                                                                     Trigger->Reference_V1190_TAPSPbWO4,
@@ -90,6 +107,9 @@ Setup_2014_EPT::Setup_2014_EPT(const string& name, OptionsPtr opt) :
     // add both CATCH converters and the V1190 first,
     // since they need to scan the detector read for their reference hit
     AddHook(convert_CATCH_Tagger);
+    AddHook(convert_CATCH_Tagger1);
+    AddHook(convert_CATCH_Tagger2);
+    AddHook(convert_CATCH_Tagger3);
     AddHook(convert_CATCH_CB);
     AddHook(convert_V1190_TAPSPbWO4);
 
@@ -109,9 +129,14 @@ Setup_2014_EPT::Setup_2014_EPT(const string& name, OptionsPtr opt) :
         LOG(INFO) << "Disabling thresholds";
 
     // then we add the others, and link it to the converters
-    AddCalibration<calibration::Time>(EPT,
+    AddCalibration<calibration::EPT_Time>(EPT,
                                       calibrationDataManager,
-                                      convert_CATCH_Tagger,
+                                      std::map<detector::EPT::Sector_t, Calibration::Converter::ptr_t>{
+                                        // use a different converter for each sector
+                                        {detector::EPT::Sector_t::SectorA, convert_CATCH_Tagger1},
+                                        {detector::EPT::Sector_t::SectorB, convert_CATCH_Tagger2},
+                                        {detector::EPT::Sector_t::SectorC, convert_CATCH_Tagger3}
+                                      },
                                       -325, // default offset in ns
                                       std::make_shared<calibration::gui::FitGausPol0>(),
                                       timecuts ? interval<double>{-120, 120} : no_timecut
